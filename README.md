@@ -19,8 +19,10 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
      User：laravel  <br>
      Passqord：laravel  <br>
      Database：laravel  <br>
-     .envファイル参照。ただこのテンプレだと上記のようになる。よく分かんない🤷 <br>
-   ・Seeder <br>
+     (envファイル参照。ただこのテンプレだと上記のようになる。よく分かんない🤷) <br>
+   ・migrationに必要な変数を追加する。(refresh忘れずに！)   <br>
+   ・modekに必要な条件を追加する(modelの役割、使い方がよく分からない🤷)  <br>
+   ・Seederを作成：仮のデータを使いたい時に便利 <br>
       
 
 <br>
