@@ -7,7 +7,7 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
    ・empty-crud-temp-10からLaravelテンプレートを流用(cloneする) <br>
    ・形整えて一度pushしておく <br>
    ・make initでdocker起動 <br>
-2. データベース <br>
+2. データベースその1(Users)　まずはログイン機能を作ろっと <br>
    ・modelを作成：データベースの中にどんなデータを書き込むのか決める係 <br>
    ・migrationを作成：データベースの枠組み(変数名など)の設計図をMySQLに依頼する係 <br>
      <命名規則> <br>
@@ -20,9 +20,11 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
      Passqord：laravel  <br>
      Database：laravel  <br>
      (envファイル参照。ただこのテンプレだと上記のようになる。よく分かんない🤷) <br>
-   ・migrationに必要な変数を追加する。(refresh忘れずに！)   <br>
-   ・modekに必要な条件を追加する(modelの役割、使い方がよく分からない🤷)  <br>
-   ・Seederを作成：仮のデータを使いたい時に便利 <br>
+   ・migrationに必要な変数を追加する。(migrate, fresh, refresh忘れずに！)   <br>
+   ・modelに必要な条件を追加する(modelの役割、使い方がよく分からない🤷)  <br>
+   (・Seederを作成：仮のデータを使いたい時に便利(DatabaseSeederに登録する, migrate --seedを忘れずに)) <br>
+3. CRUDのR:Read ログイン画面の表示させたい <br>
+   ・
       
 
 <br>
