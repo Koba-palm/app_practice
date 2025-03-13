@@ -14,12 +14,14 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
        ・日付_create_モデル名(小文字)s_tableにする。 <br>
        ・なお、php artisan make:model モデル名 -m でモデルと新しいmigrationを自動で作ってくれる。<br>
    ・右上データベース→＋→データソース→MySQLで設定を行う。<br>
-     Host：
-     Port：
-     User：
-     Passqord：
-     Database：
+     Host：127.0.0.1 (localhost。とりあえずMySQLではこれを使おう) <br>
+     Port：43306 (.envには3306とあるが、このテンプレではdocker-compose.ymlの「ports:- 43306:3306」を理由に(多分)43306に。) <br>
+     User：laravel  <br>
+     Passqord：laravel  <br>
+     Database：laravel  <br>
+     .envファイル参照。ただこのテンプレだと上記のようになる。よく分かんない🤷 <br>
    ・Seeder <br>
+      
 
 <br>
 <br>
