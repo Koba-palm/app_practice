@@ -25,7 +25,8 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
    (・Seederを作成：仮のデータを使いたい時に便利(DatabaseSeederに登録する, migrate --seedを忘れずに)) <br>
 3. CRUDのR:Read ログイン画面の表示させたい <br>
    ・
-      
+
+      次始める手順：まずはgithubでPRを許可してmerge。その後pullしてlocal mainにmerge。その後databaseにもmergeってかdatabaseは削除して新しいbranch作ろうかな？次はログイン画面のCRUDだ！
 
 <br>
 <br>
