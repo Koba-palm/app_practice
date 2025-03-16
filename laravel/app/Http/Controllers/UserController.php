@@ -42,4 +42,26 @@ class UserController extends Controller
         // user一覧へリダイレクト
         return redirect()->route('users.index');
     }
+
+    public function edit($id)  //ルートパラメータでリクエストが発生した時,動的に取得されるため$idをそのまま使える。
+    {
+        $user = User::find($id);
+        return view('users.edit', compact('user'));
+    }
+
+    public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+        ]);
+
+        $user = User::find($request['id']);
+        $user->update([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+        ]);
+
+        return redirect()->route('users.index');
+    }
 }
