@@ -7,7 +7,7 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
    ・empty-crud-temp-10からLaravelテンプレートを流用(cloneする) <br>
    ・形整えて一度pushしておく <br>
    ・make initでdocker起動 <br>
-   
+   <br>
 2. データベースその1(Users)　まずはログイン機能を作ろっと <br>
    ・modelを作成：データベースの中にどんなデータを書き込むのか決める係 <br>
    ・migrationを作成：データベースの枠組み(変数名など)の設計図をMySQLに依頼する係 <br>
@@ -24,7 +24,7 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
    ・migrationに必要な変数を追加する。(migrate, fresh, refresh忘れずに！)   <br>
    ・modelに必要な条件を追加する  <br>
    (・Seederを作成：仮のデータを使いたい時に便利(DatabaseSeederに登録する, migrate --seedを忘れずに)) <br>
-   
+   <br>
 3. CRUDのR:Read ユーザー一覧を作ろう：データベースの動作確認ができる <br>
    ＝users テーブルのデータを取得して一覧表示するページ <br>
    <必要な要素>  <br>
@@ -40,7 +40,7 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
     　　　- Controllerでview(users.index)にしたため、users/index.blade.phpと命名する。 命名規則：view(フォルダ名.ファイル名)+blade.php   <br>
          - Controllerによって渡された$usersが使用可能。ここでは@foreach($users as $user)で一覧表示を行う    <br>
          - bladeでは、<?php echo 中身; ?> を{{ 中身 }}で書ける   <br>
-
+   <br>
 4. CRUDのC:Create ユーザー登録機能を作ろう  <br>
    =ブラウザからデータベースにデータ追加を行う機能   <br>
    <必要な要素>   <br>
@@ -52,8 +52,10 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
       - create：フォーム登録Viewをreturnで返す　　<br>
       - store: Modelのcreateメソッドを使ってデータベースに$requestを保存。validationで入力チェック, redirectでユーザー一覧へ飛ばす。  <br>
    ・View：users/create.blade.php。ユーザー登録フォーム画面。  <br>
-      - route('users.store')に渡す。post method忘れずに！  <br>
-   ・
+      - route('users.store')に渡す。method="post"忘れずに！(忘れたらデフォルト設定のgetに接続される=users.index=ユーザー登録はされずにただindex画面に遷移するだけの謎操作になっちゃうｶﾞﾋﾞｰﾝ)  <br>
+  <br>
+5. CRUDのU:Update ユーザー情報の更新機能を作ろう  <br>
+   =
 
 
       
