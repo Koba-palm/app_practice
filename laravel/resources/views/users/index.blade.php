@@ -10,6 +10,7 @@
 <body>
 <h1>ユーザー一覧</h1>
 
+<a href="{{ route('users.create') }}">ユーザー登録画面へ</a>
 <table>
     <tr>
         <th>ID</th>
@@ -20,7 +21,7 @@
     @foreach($users as $user)
     <tr>
         <td>{{ $user->id }}</td>  {{-- <?php echo 中身; ?> をbladeでは{{ 中身 }}で書ける--}}
-        <td>{{ $user->name }}</td>
+        <td><a href="{{ route('users.edit', ['id' => $user->id]) }}">{{ $user->name }} </a></td>
         <td>{{ $user->email }}</td>
         {{-- $usersの中身はこんな感じ。
             [

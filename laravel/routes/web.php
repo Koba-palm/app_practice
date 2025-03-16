@@ -50,6 +50,11 @@ return view('users.index', compact('users')) により Blade ファイルへデ�
     ⬇
 ⑧ 【ブラウザ】ユーザー一覧ページが表示される
 */
+// Read: ユーザー一覧
 Route::get('/users', [UserController::class, 'index'])->name('users.index'); //usersにアクセスしたら,UserController@indexが実行される
+// Create: ユーザー登録
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
 Route::post('/users', [UserController::class, 'store'])->name('users.store');
+// Update: ユーザー情報更新
+Route::get('/users/{id}', [UserController::class, 'edit'])->name('users.edit');
+Route::post('/users/{id}', [UserController::class, 'update'])->name('users.update');
