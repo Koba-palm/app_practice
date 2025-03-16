@@ -55,7 +55,11 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
       - route('users.store')に渡す。method="post"忘れずに！(忘れたらデフォルト設定のgetに接続される=users.index=ユーザー登録はされずにただindex画面に遷移するだけの謎操作になっちゃうｶﾞﾋﾞｰﾝ)  <br>
   <br>
 5. CRUDのU:Update ユーザー情報の更新機能を作ろう  <br>
-   =
+   =ユーザーごとの更新ページからpostで上書きする。  <br>
+   <必要な要素>  <br>
+   ・Route: 編集画面を表示するルート, 更新内容を届けるルート <br>
+   ・Controller: フォームを表示するedit()と更新内容をmodelに渡すupdate()  <br>
+   ・View: ユーザー情報更新画面  <br>
 
 
       
