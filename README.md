@@ -27,23 +27,33 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
    
 3. CRUDのR:Read ユーザー一覧を作ろう：データベースの動作確認ができる <br>
    ＝users テーブルのデータを取得して一覧表示するページ <br>
-   <必要な要素>
+   <必要な要素>  <br>
       ・Model：usersテーブルと接続する。Controllerとdatabaseの橋渡し的存在。 →作成済み!  <br>
       ・Controlor：ユーザー一覧を取得する <br>
-         - Modelからデータを取得
-   　　　 - データを配列形式に変換し、Viewに送る
+         - Modelからデータを取得  <br>
+   　　　 - データを配列形式に変換し、Viewに送る  <br>
       ・Route：/usersにアクセスできるようにする   <br>
-         - Getメソッドを使用：データを取得するメソッド(他にpost, put, deleteがある)
-         - Get以下のコマンド：/usersにアクセスしたらUserController@indexが実行される
-         - Routeに名前をつけておくと、route('名前')で呼び出せるようになる → viewでそのルートへのリンクを自動生成する際に使用。
+         - Getメソッドを使用：データを取得するメソッド(他にpost, put, deleteがある)  <br>
+         - Get以下のコマンド：/usersにアクセスしたらUserController@indexが実行される  <br>
+         - Routeに名前をつけておくと、route('名前')で呼び出せるようになる → viewでそのルートへのリンクを自動生成する際に使用。  <br>
       ・View(Blade)：usersのデータを一覧表示する   <br>
-    　　　- Controllerでview(users.index)にしたため、users/index.blade.phpと命名する。 命名規則：view(フォルダ名.ファイル名)+blade.php
-         - Controllerによって渡された$usersが使用可能。ここでは@foreach($users as $user)で一覧表示を行う
-         - bladeでは、<?php echo 中身; ?> を{{ 中身 }}で書ける
+    　　　- Controllerでview(users.index)にしたため、users/index.blade.phpと命名する。 命名規則：view(フォルダ名.ファイル名)+blade.php   <br>
+         - Controllerによって渡された$usersが使用可能。ここでは@foreach($users as $user)で一覧表示を行う    <br>
+         - bladeでは、<?php echo 中身; ?> を{{ 中身 }}で書ける   <br>
 
 4. CRUDのC:Create ユーザー登録機能を作ろう  <br>
-   =ブラウザからデータベースにデータ追加を行う機能
-   <必要な要素>
+   =ブラウザからデータベースにデータ追加を行う機能   <br>
+   <必要な要素>   <br>
+   ・Model: 今回もusersを使用する。ユーザー登録に必要な情報(email, password)を追加する。 <br>
+   ・Routeの設定：createとpostのルーティングを作成  <br>
+      - /users/create にアクセスすると create() を実行し、登録フォームを表示(GET)  <br>
+      - フォームを送信すると store() を実行し、ユーザーをデータベースに保存(POST)   <br>
+   ・Controller：フォームを表示するcreate()と登録を処理するstore()を作成。　　<br>
+      - create：フォーム登録Viewをreturnで返す　　<br>
+      - store: Modelのcreateメソッドを使ってデータベースに$requestを保存。validationで入力チェック, redirectでユーザー一覧へ飛ばす。  <br>
+   ・View：users/create.blade.php。ユーザー登録フォーム画面。  <br>
+      - route('users.store')に渡す。post method忘れずに！  <br>
+   ・
 
 
       
