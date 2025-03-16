@@ -77,7 +77,7 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
     ⬇<br>
    ④ブラウザにHTMLが表示される。　　　　　　　　　　　　　　　　　　　　　　　　　　　 【クライアント側】<br>
    <br>
-【MVCモデルの説明】Controllerがユーザー, Model, Viewを繋ぐ役割を担っている。  <br>
+【MVCモデルの説明: user index】Controllerがユーザー, Model, Viewを繋ぐ役割を担っている。  <br>
    ① 【ブラウザ】`http://127.0.0.1:8000/users` にアクセス　　<br>
        ⬇　　<br>
    ② 【Laravel】`routes/web.php` のルートをチェック　　<br>
@@ -94,4 +94,26 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
        ⬇　　<br>
    ⑧ 【ブラウザ】ユーザー一覧ページが表示される　　<br>
 <br>
+【users.createの流れ】  <br>
+[ブラウザ] ユーザーが登録フォームに入力  <br>
+    ⬇　　<br>
+[ルーティング] `/users/create` にアクセス  <br>
+    ⬇　　<br>
+[Controller] UserController@create() → `users/create.blade.php` を表示  <br>
+    ⬇　　<br>
+[View] `users/create.blade.php` がブラウザに表示される  <br>
+    ⬇　　<br>
+[ブラウザ] ユーザーがフォームを送信 (`POST /users`)  <br>
+    ⬇　　<br>
+[ルーティング] `POST /users` → `UserController@store()` が実行  <br>
+    ⬇　　<br>
+[Controller] `store()` で `Request` を受け取る & バリデーションを実行  <br>
+    ⬇　　<br>  
+[Model] `User::create()` でデータベースに保存  <br>
+    ⬇　　<br>
+[Controller] `redirect()->route('users.index')`  <br>
+    ⬇　　<br>
+[ブラウザ] `/users` にリダイレクトしてユーザー一覧を表示  <br>
+<br>
+
 
