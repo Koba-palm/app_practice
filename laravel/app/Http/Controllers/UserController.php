@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -14,5 +15,31 @@ class UserController extends Controller
         /*  ① `compact('users')` で ['users' => $users] の形(配列)に変換
             ② `users.index.blade.php` に `['users' => $users]` が送られる
             ③  Blade テンプレートで `$users` が使えるようになる　　*/
+    }
+
+    public function create()
+    {
+        // user登録フォームViewに流す。
+        return view('users.create');
+    }
+
+    public function store(Request $request) // この引数は、Requestクラスのオブジェクト「$request」です、と明示している。LaravelのDependency Injectionの仕組みを使って静的でないプロパティを渡す設計になっている(多分)
+    {
+        // $requestをvalidateにかける
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required|min:6', //とりあえずrequiredは必須
+        ]);
+
+        // input(validationチェック済み)をmodelに渡し、データベースに保存してもらう。
+        User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+        ]);
+
+        // user一覧へリダイレクト
+        return redirect()->route('users.index');
     }
 }
