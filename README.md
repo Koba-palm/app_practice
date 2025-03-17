@@ -58,8 +58,20 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
    =ユーザーごとの更新ページからpostで上書きする。  <br>
    <必要な要素>  <br>
    ・Route: 編集画面を表示するルート, 更新内容を届けるルート <br>
+      - /{id}で一意のユーザーを指定できる。  <br>
+      - index.blade.phpにリンクを埋め込み、同時にidも指定すると楽。  <br>
    ・Controller: フォームを表示するedit()と更新内容をmodelに渡すupdate()  <br>
+      - Routeから自動で$idを受け取ってくれる。  <br>
+      - edit: $idで一人に絞ったデータを示す$userをviewに渡す。  <br>
+      - update: $user->update([更新内容])  <br>
    ・View: ユーザー情報更新画面  <br>
+   <br>
+6. CRUDのD:Delete ユーザー削除機能を作ろう  <br>
+   <必要な要素>   <br>
+   ・View: Indexに削除ボタンを追加。押したらusers.delete, id, method=deleteでroutingされる  <br>
+   ・Route: deleteメソッドを使用。{id}で一意のユーザー保持。Controller@deleteに渡す  <br>
+   ・Controller: $idでユーザー絞る。deleteを実行。最後にIndexにリダイレクトしとこ。  <br>
+   
 
 
       
