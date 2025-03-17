@@ -49,19 +49,27 @@ class UserController extends Controller
         return view('users.edit', compact('user'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
             'name' => 'required',
             'email' => 'required',
         ]);
 
-        $user = User::find($request['id']);
-        $user->update([
+        $user = User::find($id);  //Class::function 静的(static)メソッド
+        $user->update([  // $instance->function 動的(instance)メソッド
             'name' => $validated['name'],
             'email' => $validated['email'],
         ]);
 
         return redirect()->route('users.index');
+    }
+
+    public function delete($id)
+    {
+        $user = User::find($id);
+        $user->delete();  //削除メソッド
+
+        return redirect()->route('users.index')->with('success', 'ユーザーを削除しました。');
     }
 }

@@ -58,3 +58,4 @@ Route::post('/users', [UserController::class, 'store'])->name('users.store');
 // Update: ユーザー情報更新
 Route::get('/users/{id}', [UserController::class, 'edit'])->name('users.edit');
 Route::post('/users/{id}', [UserController::class, 'update'])->name('users.update');
+Route::delete('/users/{id}', [UserController::class, 'delete'])->name('users.delete');
