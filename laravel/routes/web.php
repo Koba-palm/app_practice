@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +58,30 @@ Route::get('/users', [UserController::class, 'index'])->name('users.index'); //u
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
 Route::post('/users', [UserController::class, 'store'])->name('users.store');
 // Update: ユーザー情報更新
-Route::get('/users/{id}', [UserController::class, 'edit'])->name('users.edit');
+Route::middleware('auth')->group(function () {
+    Route::get('/users/{id}', [UserController::class, 'edit'])->name('users.edit');
+});
 Route::post('/users/{id}', [UserController::class, 'update'])->name('users.update');
+// Delete: ユーザー削除
 Route::delete('/users/{id}', [UserController::class, 'delete'])->name('users.delete');
+
+// Login機能
+Route::get('/login', [LoginController::class, 'show'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login.post');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::middleware('auth')->group(function () {
+    Route::get('/login/home', [LoginController::class, 'home'])->name('login.home');
+});
+
+// Post機能
+Route::get('/post', [PostController::class, 'index'])->name('post.index');
+Route::middleware('auth')->group(function () {
+    Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
+});
+Route::post('/post', [PostController::class, 'store'])->name('post.store');
+Route::get('/post/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
+Route::post('/post/{id}', [PostController::class, 'update'])->name('post.update');
+Route::delete('/post/{id}', [PostController::class, 'delete'])->name('post.delete');
+
+// Post機能：詳細表示。画像表示機能。
+Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
