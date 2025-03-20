@@ -21,4 +21,9 @@ class User extends Authenticatable /* ModelからAuthenticatabelにすること�
         'password',
         'remember_token',
     ]; /* Eloquentのデータを取得する際、レスポンスに含めないためのコード。セキュリティ保持のため。 */
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);  //postと紐付け。1対多
+    }
 }
