@@ -71,7 +71,16 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
    ・View: Indexに削除ボタンを追加。押したらusers.delete, id, method=deleteでroutingされる  <br>
    ・Route: deleteメソッドを使用。{id}で一意のユーザー保持。Controller@deleteに渡す  <br>
    ・Controller: $idでユーザー絞る。deleteを実行。最後にIndexにリダイレクトしとこ。  <br>
-   
+7. ログイン機能を作ろう
+   ・Route: get(ログイン画面), post(ログイン認証), get(logout), 
+   ・Controller: ログイン用のものを作る。show(ログイン画面viewへ)。login(requestをauthで検証)。logout(Auth::logout)。home(viewに渡す)
+   ・View: ログイン画面, ログイン者専用ホーム画面を作成
+8. post機能を作ろう
+   ・Model & Migration: Userと1対多で結びつける(belongTo, hasMany)。migrationはforeignId('user_id')で外部のuser_idと結びつける。constrained()も。
+   ・CRUD作成。createはmiddlewareつける。
+9. 画像を投稿できるようにしよう
+    ・showブレード(記事の詳細表示)を追加。editとmethodもurlもかぶるのでeditの方のurlを少し変える。
+    ・migrationに
 
 
       
