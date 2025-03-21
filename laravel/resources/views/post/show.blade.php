@@ -12,8 +12,12 @@
 <form action="{{ route('post.index') }}">
     <button type="submit">一覧へ戻る</button>
 </form>
+
 <h2>{{ $post->title }}</h2>
 <p>投稿者：{{ $post->user->name }}</p>
 <p>{{ $post->body }}</p>
+@if ($post->image_path)
+    <img src="{{ asset('storage/' . $post->image_path) }}" alt="投稿画像" width="300">
+@endif
 </body>
 </html>

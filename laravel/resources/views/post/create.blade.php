@@ -10,12 +10,14 @@
 <body>
 <h1>ポスト作成画面</h1>
 
-<form action="{{ route('post.store') }}" method="post">
+<form action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
     @csrf
     <label for="title">タイトル</label>
-    <input type="text" name="title" id="title" required>
+    <input type="text" name="title" id="title" required> <br>
     <label for="body">本文</label>
-    <textarea name="body" id="body" required></textarea>
+    <textarea name="body" id="body" required></textarea> <br>
+    <label for="image">画像を選択</label>
+    <input type="file" name="image" id="image"> <br>
     <button type="submit">投稿</button>
 </form>
 </body>
