@@ -12,6 +12,7 @@ class Post extends Model
         'title',
         'body',
         'user_id',
+        'image_path',
     ]; //一括代入を許可
 
     public function user()

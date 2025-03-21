@@ -24,12 +24,21 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'  //画像ファイルのみ許可
         ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')){
+            $imagePath = $request->file('image')->store('images', 'public');
+        }   //$request->file('image') → name="image" のフォーム入力からアップロードされたファイルを取得
+            //->store('images', 'public') → storage/app/public/images/ にファイルを保存
+            //$imagePath に保存されたファイルのパスが返る（例: "images/abc123.jpg"）
 
         Post::create([
             'user_id' => Auth::id(), // ログインしているidを取得
             'title' => $validated['title'],
             'body' => $validated['body'],
+            'image_path' => $imagePath,
         ]);
 
         return redirect()->route('post.index')->with('success', 'ブログを投稿しました！');

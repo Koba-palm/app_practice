@@ -42,7 +42,7 @@
                 </form>
             </td>
             <td>
-                <form action="{{ route('post.edit', $post->id) }}" method="post">
+                <form action="{{ route('post.delete', $post->id) }}" method="post">
                     @csrf
                     @method('DELETE')
                     <button type="submit" onclick="return confirm('本当に削除しますか？')">削除</button>
