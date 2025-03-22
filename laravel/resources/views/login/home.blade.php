@@ -29,8 +29,24 @@
     <button>ユーザー情報を変更する</button>
 </form>
 
+<h2>自分の投稿一覧</h2>
+@foreach(Auth::user()->posts as $post)  <!-- userはAuthのメソッドなので()が必要。postsはプロパティ -->
+    <a href="{{ route('post.show', $post->id) }}">{{ $post->title }}</a>
+    <br>
+@endforeach
+<form action="{{ route('post.create') }}">
+    <button type="submit">投稿を作成する</button>
+</form>
 
+<h2>つながり</h2>
+<p>フォロー：{{ Auth::user()->followingUsers->count() }}</p>
+<p>フォロワー：{{ Auth::user()->followedUsers->count() }}</p>
+<form action="{{ route('follow.index') }}">
+    <button type="submit">友達一覧</button>
+</form>
 
+<br>
+<br>
 <form action="{{ route('logout') }}">
     <button>ログアウト</button>
 </form>

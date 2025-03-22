@@ -24,7 +24,6 @@
     <thead>
         <tr>
             <th>タイトル</th>
-            <th>本文</th>
             <th>投稿者</th>
         </tr>
     </thead>
