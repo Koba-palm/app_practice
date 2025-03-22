@@ -85,3 +85,10 @@ Route::delete('/post/{id}', [PostController::class, 'delete'])->name('post.delet
 
 // Post機能：詳細表示。画像表示機能。
 Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
+
+// フォロー機能
+Route::middleware('auth')->group(function () {
+    Route::get('/follow', [UserController::class, 'follow_index'])->name('follow.index');
+    Route::post('/follow/{user}', [UserController::class, 'follow'])->name('follow');
+    Route::delete('/unfollow/{user}', [UserController::class, 'unfollow'])->name('unfollow');
+});

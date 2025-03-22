@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -71,5 +72,33 @@ class UserController extends Controller
         $user->delete();  //削除メソッド
 
         return redirect()->route('users.index')->with('success', 'ユーザーを削除しました。');
+    }
+
+    public function follow(User $user) //フォローする相手ユーザーを引数で受け取る
+    {
+        if (Auth::id() == $user->id) {
+            return back()->with('error', "自分はフォローできません。");
+        }
+
+        // 自分がまだこのユーザーをフォローしていなければフォローする
+        if (!Auth::user()->followingUsers->contains($user->id)) { //現在ログインしているユーザーがフォローしているユーザーの一覧に引数のユーザーが含まれていなかったら、
+            Auth::user()->followingUsers()->attach($user->id);
+        }
+        return back()->with('success', "{$user->name}さんをフォローしました！"); //back(): 元のページにリダイレクト。sessionにsuccessメッセージを保存
+    }
+
+    public function unfollow(User $user)
+    {
+        if (Auth::user()->followingUsers->contains($user->id)) { //followingUsers: データを「見る」。Laravelではメソッド(関数)をプロパティのように扱える(リレーションプロパティ)。自動で同じ名前のメソッドを検索して実行し、実データとして返してくれるため。
+            Auth::user()->followingUsers()->detach($user->id);       //followingUsers(): データを「いじる」。user_relationsのクエリビルダー(DBを編集する権限的なもの)を渡す。
+        }
+        return back()->with('success', "{$user->name}さんのフォローを解除しました");
+    }
+
+    public function follow_index()
+    {
+        $followings = Auth::user()->followingUsers;
+        $followers = Auth::user()->followedUsers;
+        return view('follow.index', compact('followings', 'followers'));
     }
 }

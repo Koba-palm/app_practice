@@ -15,6 +15,37 @@
 
 <h2>{{ $post->title }}</h2>
 <p>投稿者：{{ $post->user->name }}</p>
+@if (Auth::id() != $post->user->id)
+    @if (Auth::user()->followingUsers->contains($post->user->id) && Auth::user()->followedUsers->contains($post->user->id))
+        <p>相互フォローです。</p>
+        <form action="{{ route('unfollow', $post->user) }}" method="post">
+            @csrf
+            @method('DELETE')
+            <button type="submit">フォローを解除</button>
+        </form>
+    @elseif (Auth::user()->followingUsers->contains($post->user->id))
+        <p>フォローしています。</p>
+        <form action="{{ route('unfollow', $post->user) }}" method="post">
+            @csrf
+            @method('DELETE')
+            <button type="submit">フォローを解除</button>
+        </form>
+    @elseif (Auth::user()->followedUsers->contains($post->user->id))
+        <p>フォローされています。</p>
+        <form action="{{ route('follow', $post->user) }}" method="post">
+            @csrf
+            <button type="submit">フォロー</button>
+        </form>
+    @else <p>あなたからフォローしてみましょう！</p>
+    <form action="{{ route('follow', $post->user) }}" method="post">
+        @csrf
+        <button type="submit">フォロー</button>
+    </form>
+    @endif
+@endif
+
+
+
 <p>{{ $post->body }}</p>
 @if ($post->image_path)
     <img src="{{ asset('storage/' . $post->image_path) }}" alt="投稿画像" width="300">

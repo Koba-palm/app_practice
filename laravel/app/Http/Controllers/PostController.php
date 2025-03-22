@@ -55,12 +55,18 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
+        $imagePath = null;
+        if ($request->hasFile('image')){
+            $imagePath = $request->file('image')->store('images', 'public');
+        }
 
         $post = Post::find($id);
         $post->update([
             'title' => $validated['title'],
             'body' => $validated['body'],
+            'image_path' => $imagePath
         ]);
 
         return redirect()->route('post.index');
