@@ -80,7 +80,22 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
    ・CRUD作成。createはmiddlewareつける。  <br>
 9. 画像を投稿できるようにしよう  <br>
     ・showブレード(記事の詳細表示)を追加。editとmethodもurlもかぶるのでeditの方のurlを少し変える。  <br>
-    ・migrationに  <br>
+    ・migrationにstring('image_path)を追加。  <br>
+       - make:migration [名前] --table=post で新しいmigrationファイルを作る。なぜ？▶︎既存のものを編集したらfreshしないと反映されない。freshしたら今あるデータが全部なくなる😭 <br>
+    ・Postモデルのfillableにimage_pathを付け加える  <br>
+    ・Controller: $imagePath = $request->file('image')->store('images', 'public');でpublicフォルダに画像を保存し、そのパスを取得。DBに渡すのは画像そのものではなく、パス！  <br>
+    ※Laravelはデフォルトは1Mまでしかアップできない。色々試したけど解消できませんでした。  <br>
+10. フォロー機能を搭載しよう  <br>
+    ・migrationでuser_relationsを作成(外部キー2つを繋ぐ中間テーブル)。 <br>
+    ・UserにbelongsToManyを二つ追加(多対多)。  <br>
+       - return $this->belongsToMany(  //belongsToMany()は中間テーブルのある多対多のリレーションで使用。  <br>
+            User::class,  //中間テーブルで繋がっている相手のクラス  <br>  
+            'user_relationships',   //中間テーブル名を手動で指定する必要あり。  <br>
+            'following_id', //呼び出し元モデルの外部キー = 自分 を指すカラムを指定  <br>
+            'followed_id'); //関連モデルの外部キー = 相手  <br>
+    ・CRUDを作成。
+       - <新出>リレーションプロパティ
+       - 自分をフォローできないようにcontrollerで制限をかける。
 
 
       
@@ -142,5 +157,12 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
     ⬇　　<br>
 [ブラウザ] `/users` にリダイレクトしてユーザー一覧を表示  <br>
 <br>
-
+Auth::user()->posts でログイン中のユーザーのポストを取得できる。  <br>
+🔹 プロパティ	オブジェクトが持ってる「値」	$user->name, $user->email  <br>
+🔹 メソッド	オブジェクトに「させる動作」	$user->sendEmail(), $user->posts()  <br>
+🔹 リレーション	モデル同士の「つながり」	$user->posts（User が持つ Post 一覧）  <br>
+<br>
+クエリビルダー：SQL文を、PHPのコード（オブジェクト指向）で書ける仕組み のこと。 e.g.)User::all()  <br>
+$user->followingUsersだと、フォローしているユーザーの一覧を「取得」する。リレーションプロパティと呼ばれる(メソッドをプロパティの様に使用できる)。  <br>
+$user->followingUsers()だと、フォローしているユーザーに関するテーブル(ここではuser_relations)のクエリビルダー(データベースを編集する権限みたいなもの)を渡すことになる。  <br>
 
