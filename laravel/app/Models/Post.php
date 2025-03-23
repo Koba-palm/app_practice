@@ -19,4 +19,8 @@ class Post extends Model
     {
         return $this->belongsTo(User::class); //userとpostを紐付ける。ポストは一人のユーザーに属する。
     }
+    public function replies() // 1対多
+    {
+        return $this->hasMany(Reply::class);
+    }
 }

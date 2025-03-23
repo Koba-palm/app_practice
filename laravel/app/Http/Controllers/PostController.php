@@ -24,7 +24,7 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'  //画像ファイルのみ許可
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg'  //画像ファイルのみ許可
         ]);
 
         $imagePath = null;
@@ -47,6 +47,9 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
+        if (Auth::id() != $post->user_id) {
+            return redirect()->route('post.show')->with('error', "投稿者本人のみ編集できます。");
+        }
         return view('post.edit', compact('post'));
     }
 

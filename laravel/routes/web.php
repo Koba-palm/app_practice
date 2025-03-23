@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReplyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,4 +92,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/follow', [UserController::class, 'follow_index'])->name('follow.index');
     Route::post('/follow/{user}', [UserController::class, 'follow'])->name('follow');
     Route::delete('/unfollow/{user}', [UserController::class, 'unfollow'])->name('unfollow');
+});
+
+// リプライ機能
+Route::middleware('auth')->group(function () {
+    Route::get('/post/{post_id}/reply', [ReplyController::class, 'create'])->name('reply.create');
+    Route::post('/post/{post_id}/reply', [ReplyController::class, 'store'])->name('reply.store');
+    Route::get('/post/reply/{reply_id}/edit', [ReplyController::class, 'edit'])->name('reply.edit');
+    Route::post('/post/reply/{reply_id}', [ReplyController::class, 'update'])->name('reply.update');
+    Route::delete('/post/reply/{id}', [ReplyController::class, 'delete'])->name('reply.delete');
 });
