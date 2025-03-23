@@ -71,13 +71,16 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
    ・View: Indexに削除ボタンを追加。押したらusers.delete, id, method=deleteでroutingされる  <br>
    ・Route: deleteメソッドを使用。{id}で一意のユーザー保持。Controller@deleteに渡す  <br>
    ・Controller: $idでユーザー絞る。deleteを実行。最後にIndexにリダイレクトしとこ。  <br>
+   <br>
 7. ログイン機能を作ろう  <br>
    ・Route: get(ログイン画面), post(ログイン認証), get(logout),   <br>
    ・Controller: ログイン用のものを作る。show(ログイン画面viewへ)。login(requestをauthで検証)。logout(Auth::logout)。home(viewに渡す)  <br>
    ・View: ログイン画面, ログイン者専用ホーム画面を作成  <br>
+   <br>
 8. post機能を作ろう  <br>
    ・Model & Migration: Userと1対多で結びつける(belongTo, hasMany)。migrationはforeignId('user_id')で外部のuser_idと結びつける。constrained()も。  <br>
    ・CRUD作成。createはmiddlewareつける。  <br>
+   <br>
 9. 画像を投稿できるようにしよう  <br>
     ・showブレード(記事の詳細表示)を追加。editとmethodもurlもかぶるのでeditの方のurlを少し変える。  <br>
     ・migrationにstring('image_path)を追加。  <br>
@@ -85,6 +88,7 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
     ・Postモデルのfillableにimage_pathを付け加える  <br>
     ・Controller: $imagePath = $request->file('image')->store('images', 'public');でpublicフォルダに画像を保存し、そのパスを取得。DBに渡すのは画像そのものではなく、パス！  <br>
     ※Laravelはデフォルトは1Mまでしかアップできない。色々試したけど解消できませんでした。  <br>
+    <br>
 10. フォロー機能を搭載しよう  <br>
     ・migrationでuser_relationsを作成(外部キー2つを繋ぐ中間テーブル)。 <br>
     ・UserにbelongsToManyを二つ追加(多対多)。  <br>
@@ -96,8 +100,22 @@ Laravelを用いたwebアプリ開発の練習。git, githubを使う練習も�
     ・CRUDを作成。  <br>
        - <新出>リレーションプロパティ  <br>
        - 自分をフォローできないようにcontrollerで制限をかける。  <br>
+       <br>
 11. リプライ機能を追加しよう  <br>
    ・DB作成
+   ・CRUD作成：だいぶ慣れてきた
+<br>
+12. Factory, Seederを使ってデータを自動生成しよう <br>
+   ・make:factory factoryの名前 でfactoryファイルを作成。Seederに書くのと同じ感じで書いていく。 <br>
+   ・違うところは$this->faker->realText(30),のようにfakerに作らせるところ。 <br>
+   ・DummyDataSeederを新たに作成。factoryを噛ませてランダムデータを生成していく。 <br>
+   ・日本語のみにもできるが手間取った。AppServiceProviderで指定できる。 <br>
+<br>
+13. Bootstrapを使ってフロントエンドを綺麗に整えよう <br>
+   ・view/layouts/app.blade.php を作成し、基盤テンプレレイアウトを作成する <br>
+   ・他のbladeで@extends(layouts.app')で引き継ぐ <br>
+   ・@section('content')の中に書いていく <br>
+   ・classからBootstrapの指定デザインを簡単にしようできる(container, btn, fs-3など)。layout.appで新しいテンプレclassも作成可能 <br>
 
 
       
