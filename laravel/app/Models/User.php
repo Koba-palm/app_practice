@@ -45,4 +45,9 @@ class User extends Authenticatable /* ModelからAuthenticatabelにすること�
             'following_id'  //相手はフォローする側
         );
     }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
 }

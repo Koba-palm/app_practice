@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('relation_id');
             $table->foreignId('following_id')->constrained('users')->onDelete('cascade'); //フォローする側のuser_id
             $table->foreignId('followed_id')->constrained('users')->onDelete('cascade');  //フォローされる側のuser_id
-            $table->unique(['follower_id', 'following_id']);  //組み合わせが一意であると指定
+            $table->unique(['followed_id', 'following_id']);  //組み合わせが一意であると指定
             $table->timestamps();
         });
     }

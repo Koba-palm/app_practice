@@ -1,21 +1,36 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h1>{{ Auth::user()->name }}さんの友達一覧</h1>
-<h2>フォロー</h2>
-@foreach($followings as $following)
-    <p>{{ $following->name }}</p>
-@endforeach
-<h2>フォロワー</h2>
-@foreach($followers as $follower)
-    <p>{{ $follower->name }}</p>
-@endforeach
-</body>
-</html>
+@extends('layouts.app')
+@section('title', Auth::user()->name .'の友達一覧')
+@section('content')
+    <div class="container">
+        <h1 class="fs-3 mb-4">{{ Auth::user()->name }}さんの友達一覧</h1>
+
+        {{-- ✅ フォロー一覧 --}}
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                フォローしている人（{{ $followings->count() }}人）
+            </div>
+            <ul class="list-group list-group-flush">
+                @forelse($followings as $following)
+                    <li class="list-group-item">{{ $following->name }}</li>
+                @empty
+                    <li class="list-group-item text-muted">まだ誰もフォローしていません</li>
+                @endforelse
+            </ul>
+        </div>
+
+        {{-- ✅ フォロワー一覧 --}}
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                フォローされている人（{{ $followers->count() }}人）
+            </div>
+            <ul class="list-group list-group-flush">
+                @forelse($followers as $follower)
+                    <li class="list-group-item">{{ $follower->name }}</li>
+                @empty
+                    <li class="list-group-item text-muted">まだフォロワーがいません</li>
+                @endforelse
+            </ul>
+        </div>
+    </div>
+@endsection
+

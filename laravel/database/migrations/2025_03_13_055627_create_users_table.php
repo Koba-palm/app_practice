@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken(); /* ログイン情報を保持する機能らしい */
             $table->timestamps();
+            $table->timestamp('email_verified_at')->nullable();
         });
     }
 
